@@ -12,6 +12,9 @@ namespace GorodKrovi_PuzzleSolver
         public int currentIndex = 0;
         string[] connections;
 
+        public AirflowNode()
+        { }
+
         public AirflowNode(string location, string[] connectionList)
         {
             locationName = location;
@@ -43,18 +46,6 @@ namespace GorodKrovi_PuzzleSolver
         public override string ToString()
         {
             string output = "Location: " + locationName;
-            output += Environment.NewLine;
-            output += "Current Index: " + currentIndex;
-            output += Environment.NewLine;
-            int index = 0;
-            foreach (string connection in connections)
-            {
-                output += "Connection " + (index + 1).ToString() + ": ";
-                output += connections[index];
-                output += System.Environment.NewLine;
-                index++;
-            }
-
             return output;
         }
     }

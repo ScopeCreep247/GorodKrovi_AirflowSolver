@@ -35,7 +35,7 @@
             this.lblStart = new System.Windows.Forms.Label();
             this.cmbStartLocation = new System.Windows.Forms.ComboBox();
             this.btnCalculate = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
+            this.btnClear = new System.Windows.Forms.Button();
             this.txtOutput = new System.Windows.Forms.TextBox();
             this.startLabel.SuspendLayout();
             this.SuspendLayout();
@@ -111,15 +111,15 @@
             this.btnCalculate.UseVisualStyleBackColor = true;
             this.btnCalculate.Click += new System.EventHandler(this.btnCalculate_Click);
             // 
-            // button1
+            // btnClear
             // 
-            this.button1.Location = new System.Drawing.Point(311, 227);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(119, 23);
-            this.button1.TabIndex = 3;
-            this.button1.Text = "Clear";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.btnClear.Location = new System.Drawing.Point(311, 227);
+            this.btnClear.Name = "btnClear";
+            this.btnClear.Size = new System.Drawing.Size(119, 23);
+            this.btnClear.TabIndex = 3;
+            this.btnClear.Text = "Clear";
+            this.btnClear.UseVisualStyleBackColor = true;
+            this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
             // 
             // txtOutput
             // 
@@ -136,7 +136,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(784, 561);
             this.Controls.Add(this.txtOutput);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.btnClear);
             this.Controls.Add(this.btnCalculate);
             this.Controls.Add(this.startLabel);
             this.Controls.Add(this.headerLabel);
@@ -158,7 +158,7 @@
         private System.Windows.Forms.Label lblStart;
         private System.Windows.Forms.ComboBox cmbStartLocation;
         private System.Windows.Forms.Button btnCalculate;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnClear;
         private System.Windows.Forms.TextBox txtOutput;
     }
 }

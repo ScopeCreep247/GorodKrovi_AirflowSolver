@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Diagnostics;
 
 namespace GorodKrovi_PuzzleSolver
 {
@@ -35,7 +36,11 @@ namespace GorodKrovi_PuzzleSolver
             {
                 txtOutput.Text = "";
                 coordinator.InitializePuzzle((AirflowNode)cmbStartLocation.SelectedItem, (AirflowNode)cmbEndLocation.SelectedItem);
-                AirflowNode[] path = coordinator.CalculatePath();
+
+                Stopwatch timer = new Stopwatch();
+                timer.Start();
+                List<AirflowNode> path = coordinator.CalculatePath();
+                timer.Stop();
 
                 foreach (AirflowNode node in path)
                 {
@@ -47,6 +52,9 @@ namespace GorodKrovi_PuzzleSolver
 
                     txtOutput.Text += Environment.NewLine;
                 }
+
+                txtOutput.Text += Environment.NewLine;
+                txtOutput.Text += "Calculated in " + timer.Elapsed.TotalMilliseconds + " milliseconds";
             }
             else
             {
@@ -54,7 +62,7 @@ namespace GorodKrovi_PuzzleSolver
             }
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void btnClear_Click(object sender, EventArgs e)
         {
             coordinator = new PathCoordinator();
             cmbStartLocation.SelectedIndex = -1;

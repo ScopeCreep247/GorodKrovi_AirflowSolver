@@ -9,7 +9,7 @@ namespace GorodKrovi_PuzzleSolver
     public class PathCoordinator
     {
         List<AirflowNode> nodes = new List<AirflowNode>();
-        AirflowNode[] path = new AirflowNode[6];
+        List<AirflowNode> path = new List<AirflowNode>();
         AirflowNode endPoint;
 
         const String armory = "Armory";
@@ -26,7 +26,7 @@ namespace GorodKrovi_PuzzleSolver
 
         public void InitializePuzzle(AirflowNode startNode, AirflowNode endNode)
         {
-            path[0] = startNode;
+            path.Add(startNode);
             endPoint = endNode;
         }
 
@@ -49,6 +49,7 @@ namespace GorodKrovi_PuzzleSolver
             nodes.Add(tankFactoryNode);
         }
 
+        /*
         public AirflowNode GetNextNode(AirflowNode currentNode)
         {
             String nextNodeName = currentNode.GetNextNodeName();
@@ -73,8 +74,47 @@ namespace GorodKrovi_PuzzleSolver
 
             return nextNode;
         }
+        */
 
-        public AirflowNode[] CalculatePath()
+        public AirflowNode GetNextNode(AirflowNode currentNode)
+        {
+            String nextNodeName = currentNode.GetNextNodeName();
+            AirflowNode foundNode = new AirflowNode();
+
+            while (foundNode != null)
+            {
+                try
+                {
+                    foundNode = path.Find(s => s != null && s.Name.Equals(nextNodeName));
+                    if (foundNode != null ||
+                         ((nextNodeName.Equals(endPoint.Name) && path.Count<AirflowNode>() < 5)))
+                    {
+                        nextNodeName = currentNode.GetNextNodeName();
+                        foundNode = new AirflowNode();
+                    }
+                }
+                catch(Exception e)
+                { }
+            }
+
+            AirflowNode nextNode = null;
+
+            if (nextNodeName != null)
+            {
+                foreach (AirflowNode node in nodes)
+                {
+                    if (node.Name.Equals(nextNodeName))
+                    {
+                        nextNode = node;
+                        break;
+                    }
+                }
+            }
+
+            return nextNode;
+        }
+
+        public List<AirflowNode> CalculatePath()
         {
             bool solved = false;
             int currentIndex = 1;
@@ -84,13 +124,25 @@ namespace GorodKrovi_PuzzleSolver
                 AirflowNode nextNode = GetNextNode(path[currentIndex - 1]);
                 if(nextNode != null)
                 {
-                    path[currentIndex] = nextNode;
+                    path.Add(nextNode);
                     currentIndex++;
                 }
-
-                if(path[5] != null && path[5].Name.Equals(endPoint.Name))
+                else
                 {
-                    solved = true;
+                    path.RemoveAt(currentIndex - 1);
+                    currentIndex--;
+                }
+
+                if(path.Count > 5)
+                {
+                    if (path[5].Name.Equals(endPoint.Name))
+                    {
+                        solved = true;
+                    }
+                    else
+                    {
+                        path.RemoveAt(5);
+                    }
                 }
             }
 
